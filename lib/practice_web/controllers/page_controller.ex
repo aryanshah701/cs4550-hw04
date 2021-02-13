@@ -6,21 +6,43 @@ defmodule PracticeWeb.PageController do
   end
 
   def double(conn, %{"x" => x}) do
-    {x, _} = Integer.parse(x)
-    y = Practice.double(x)
-    render conn, "double.html", x: x, y: y
+    try do
+      {x, _} = Integer.parse(x)
+      y = Practice.double(x)
+      render conn, "double.html", x: x, y: y
+    rescue
+      _e -> render conn, "double.html", x: x, y: "Sorry, error"
+    end
   end
 
   def calc(conn, %{"expr" => expr}) do
-    y = Practice.calc(expr)
-    render conn, "calc.html", expr: expr, y: y
+    try do
+      y = Practice.calc(expr)
+      render conn, "calc.html", expr: expr, y: y
+    rescue
+      _e -> 
+        render conn, "calc.html", expr: expr, y: "Error"
+    end
   end
 
   def factor(conn, %{"x" => x}) do
-    y = Practice.factor(x)
-    render conn, "factor.html", x: x, y: y
+    try do
+      {x, _rest} = Integer.parse(x)
+      y = inspect(Practice.factor(x))
+      render conn, "factor.html", x: x, y: y
+    rescue
+      _e -> 
+        render conn, "factor.html", x: x, y: "Error"
+    end
   end
 
-  # TODO: Add an action for palindrome.
-  # TODO: Add a template for palindrome over in lib/*_web/templates/page/??.html.eex
+  def palindrome(conn, %{"str" => str}) do
+    if str do
+      isPalindrome = Practice.palindrome(str)
+      render conn, "palindrome.html", str: str, isPalindrome: isPalindrome
+    else
+      render conn, "palindrome.html", str: "", isPalindrome: true
+    end
+  end
+
 end

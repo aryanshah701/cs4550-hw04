@@ -1,0 +1,10 @@
+<!-- The below html layout was taken from the starter code double html page-->
+<div class="row">
+  <div class="column">
+    <p><%= link "← go back", to: "/" %></p>
+    <h2>Factor Results</h2>
+
+    <p>x = <%= @x %></p>
+    <p>Prime factors of <%= @x %> are <%= @y %></p>
+  </div>
+</div>

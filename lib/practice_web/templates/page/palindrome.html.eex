@@ -1,0 +1,10 @@
+<!-- The below html layout was taken from the starter code double html page-->
+<div class="row">
+  <div class="column">
+    <p><%= link "← go back", to: "/" %></p>
+    <h2>Plaindrome Results</h2>
+
+    <p>Word: <%= @str %></p>
+    <p>Is the string "<%= @str %>" a palindrome? Ans: <%= @isPalindrome %></p>
+  </div>
+</div>
